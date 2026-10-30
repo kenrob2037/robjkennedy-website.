@@ -22,7 +22,7 @@ return;
 }
 status.textContent='Your message has been submitted. Thank you.';
 form.reset();
-}catch(error){status.textContent='Your message could not be sent. Please try again shortly. Your message has been kept in the form.';}
+}catch(error){console.error('Contact form delivery:',error);status.textContent='The contact service could not be reached or returned an unreadable response. Your message has been kept in the form.';}
 finally{button.disabled=false;}
 });
 </script></body></html>
