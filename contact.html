@@ -16,7 +16,10 @@ const payload=Object.fromEntries(new FormData(form));
 payload._captcha='false';
 const response=await fetch('https://formsubmit.co/ajax/'+atob('a2Vucm9iMjAzN0BnbWFpbC5jb20='),{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload)});
 const result=await response.json();
-if(!response.ok||!(result.success===true||result.success==='true'))throw new Error('Submission failed');
+if(!response.ok||!(result.success===true||result.success==='true')){
+status.textContent=(typeof result.message==='string' ? result.message : 'The contact service could not accept your message.')+' Your message has been kept in the form.';
+return;
+}
 status.textContent='Your message has been submitted. Thank you.';
 form.reset();
 }catch(error){status.textContent='Your message could not be sent. Please try again shortly. Your message has been kept in the form.';}
